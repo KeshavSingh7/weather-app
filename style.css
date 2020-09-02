@@ -5,36 +5,54 @@
 }
 
 body {
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  background: linear-gradient(rgb(47, 150, 163), rgb(48, 62, 143));
+  background: linear-gradient(rgb(47, 150, 163), rgb(48, 62, 143)) no-repeat
+    center center fixed;
+  background-size: cover;
   color: white;
   font-family: "Poppins", sans-serif;
 }
 
-.location,
-.temperature {
-  height: 30vh;
-  width: 75%;
+.container-fluid {
+  height: fit-content;
+  width: fit-content;
   display: flex;
-  justify-content: space-around;
-  align-items: center;
-}
-
-.temperature {
   flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
 }
 
-.degree {
+.row {
+  margin-top: 50px;
+}
+
+.col-sm-4 {
   display: flex;
+  justify-content: center;
   align-items: center;
 }
 
-.degree span {
+.col {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.col span {
   margin-left: 10px;
   padding-bottom: 8px;
-  font-size: 40px;
+  font-size: 25px;
+}
+
+@media only screen and (max-width: 600px) {
+  .container-fluid .row:first-child {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
 }

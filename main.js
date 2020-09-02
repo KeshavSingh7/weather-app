@@ -1,30 +1,35 @@
 window.addEventListener("load", () => {
   let longitude;
   let latitude;
-  let timezone = document.getElementById("timezone");
+  let place = document.getElementById("place");
+  let region = document.getElementById("region");
+  let country = document.getElementById("country");
+  let icon = document.getElementById("icon");
   let temp = document.getElementById("temp");
-  let desc = document.getElementById("description");
+  let desc = document.getElementById("desc");
 
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition((position) => {
-      console.log(position);
-      const longitude = position.coords.longitude;
-      const latitude = position.coords.latitude;
-      //const proxy = "https://cors-anywhere.herokuapp.com/";
-      const api = `http://api.weatherapi.com/v1/current.json?key=6ab45c63b0a040fe90c145636200109&q=${latitude},${longitude}`;
+      longitude = position.coords.longitude;
+      latitude = position.coords.latitude;
+      const api = `https://api.weatherapi.com/v1/current.json?key=6ab45c63b0a040fe90c145636200109&q=${latitude},${longitude}`;
       fetch(api)
         .then((response) => {
           return response.json();
         })
         .then((data) => {
-          console.log(data);
-          const place = data.location.name;
-          const state = data.location.region;
-          const country = data.location.country;
-          const temp = data.current.temp_c;
-          const desc = data.current.condition.text;
-          timezone.innerText = place + " / " + state + " / " + country;
-          console.log(place, state, country, temp, desc);
+          const getPlace = data.location.name;
+          const getRegion = data.location.region;
+          const getCountry = data.location.country;
+          const getIcon = data.current.condition.icon;
+          const getTemp = data.current.temp_c;
+          const getDesc = data.current.condition.text;
+          place.innerText = getPlace + ", ";
+          region.innerText = getRegion + ", ";
+          country.innerText = getCountry;
+          temp.innerText = getTemp;
+          icon.setAttribute("src", getIcon);
+          desc.innerText = getDesc;
         });
     });
   }
